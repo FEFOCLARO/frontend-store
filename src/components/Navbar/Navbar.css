@@ -1,0 +1,112 @@
+.navbar {
+    background-color: var(--primary-dark);
+    padding: 0;
+    border-bottom: 3px solid var(--primary);
+}
+
+.navbar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 16px;
+}
+
+.navbar__all-categories {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 20px;
+    height: 100%;
+    background-color: var(--primary);
+    color: var(--text-light);
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.navbar__all-categories:hover {
+    background-color: #ff5722;
+}
+
+.navbar__categories {
+    display: flex;
+    height: 100%;
+}
+
+.navbar__category {
+    position: relative;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar__category:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 1000;
+}
+
+.navbar__dropdown-item {
+    display: block;
+    padding: 8px 16px;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar__dropdown-item:hover {
+    background-color: var(--background-light);
+    color: var(--primary);
+}
+
+.navbar__promo {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 16px;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.navbar__promo:hover {
+    transform: scale(1.05);
+}
+
+.navbar__promo-icon {
+    font-size: 1.2em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar__categories {
+        display: none;
+    }
+    
+    .navbar__promo {
+        display: none;
+    }
+    
+    .navbar__all-categories {
+        width: 100%;
+        justify-content: center;
+    }
+}

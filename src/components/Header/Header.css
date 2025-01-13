@@ -1,0 +1,157 @@
+/* Variáveis de cores que usaremos em todo o site */
+:root {
+    --primary-dark: #1B1B3A;    /* Azul escuro para fundo */
+    --primary: #FF4500;         /* Laranja para destaques */
+    --accent: #FFD700;          /* Dourado para elementos importantes */
+    --text-light: #FFFFFF;
+    --text-dark: #333333;
+    --background-light: #F5F5F5;
+}
+
+/* Estilos da barra superior */
+.top-bar {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.top-bar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.top-bar__nav {
+    display: flex;
+    gap: 24px;
+}
+
+.top-bar__nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.top-bar__nav a:hover {
+    color: var(--accent);
+}
+
+/* Barra principal */
+.main-bar {
+    background-color: var(--primary);
+    padding: 16px 0;
+}
+
+.main-bar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 16px;
+}
+
+.main-bar__logo {
+    width: 180px;
+}
+
+.main-bar__search {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+}
+
+.main-bar__search input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 0 24px;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.main-bar__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Estilos dos botões de ação */
+.televendas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+}
+
+.televendas .info {
+    display: flex;
+    flex-direction: column;
+}
+
+.televendas .label {
+    font-size: 12px;
+}
+
+.televendas .phone {
+    font-weight: bold;
+}
+
+.auth-button,
+.orders-button,
+.cart-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.auth-button:hover,
+.orders-button:hover,
+.cart-button:hover {
+    transform: translateY(-2px);
+}
+
+.cart-count {
+    background-color: var(--accent);
+    color: var(--text-dark);
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .top-bar__nav {
+        display: none;
+    }
+
+    .main-bar__actions {
+        gap: 8px;
+    }
+
+    .televendas .info,
+    .auth-button span:not(.icon),
+    .orders-button span:not(.icon) {
+        display: none;
+    }
+}
