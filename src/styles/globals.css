@@ -1,0 +1,37 @@
+/* Definição das variáveis de cores globais que serão usadas em todo o site */
+:root {
+    --primary-dark: #1B1B3A;    /* Cor base para fundos escuros, como a navegação */
+    --primary: #FF4500;         /* Cor principal para destaques e ações */
+    --accent: #FFD700;          /* Cor de destaque para elementos importantes */
+    --text-light: #FFFFFF;      /* Cor para textos em fundos escuros */
+    --text-dark: #333333;       /* Cor para textos em fundos claros */
+    --background-light: #F5F5F5; /* Cor de fundo clara para o site */
+}
+
+/* Reset básico de estilos para garantir consistência */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-light);
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* Estilos básicos para links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Container padrão para limitar a largura do conteúdo */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}

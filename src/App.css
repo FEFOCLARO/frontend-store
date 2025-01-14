@@ -1,0 +1,11 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para o conteúdo principal, dando espaço para o header fixo */
+.main-content {
+  margin-top: 60px; /* Ajuste este valor de acordo com a altura do seu header */
+  flex: 1;
+}

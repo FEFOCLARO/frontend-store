@@ -1,157 +1,110 @@
-/* Variáveis de cores que usaremos em todo o site */
-:root {
-    --primary-dark: #1B1B3A;    /* Azul escuro para fundo */
-    --primary: #FF4500;         /* Laranja para destaques */
-    --accent: #FFD700;          /* Dourado para elementos importantes */
-    --text-light: #FFFFFF;
-    --text-dark: #333333;
-    --background-light: #F5F5F5;
+.header {
+    background: linear-gradient(to right, #1a1a1a, #333);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos da barra superior */
-.top-bar {
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    padding: 8px 0;
-    font-size: 14px;
-}
-
-.top-bar__container {
+.header__container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 16px;
 }
 
-.top-bar__nav {
-    display: flex;
-    gap: 24px;
-}
-
-.top-bar__nav a {
-    color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.top-bar__nav a:hover {
-    color: var(--accent);
-}
-
-/* Barra principal */
-.main-bar {
-    background-color: var(--primary);
-    padding: 16px 0;
-}
-
-.main-bar__container {
-    max-width: 1200px;
-    margin: 0 auto;
+.header__logo {
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 0 16px;
+    gap: 0.5rem;
 }
 
-.main-bar__logo {
-    width: 180px;
+.header__logo-icon {
+    font-size: 2rem;
 }
 
-.main-bar__search {
-    flex: 1;
+.header__title {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: bold;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header__nav-list {
     display: flex;
-    gap: 8px;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.main-bar__search input {
-    flex: 1;
-    padding: 12px 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
+.header__nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 0.25rem;
 }
 
-.search-button {
-    padding: 0 24px;
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    border: none;
+.header__nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFD700;
+    transition: width 0.3s ease;
+}
+
+.header__nav-link:hover:after {
+    width: 100%;
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header__admin-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
     border-radius: 4px;
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease;
 }
 
-.main-bar__actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.header__admin-link:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-/* Estilos dos botões de ação */
-.televendas {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-light);
-}
-
-.televendas .info {
-    display: flex;
-    flex-direction: column;
-}
-
-.televendas .label {
-    font-size: 12px;
-}
-
-.televendas .phone {
-    font-weight: bold;
-}
-
-.auth-button,
-.orders-button,
-.cart-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: none;
+.header__cart-button {
+    background: #FFD700;
+    color: #1a1a1a;
     border: none;
-    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-.auth-button:hover,
-.orders-button:hover,
-.cart-button:hover {
+.header__cart-button:hover {
+    background: #FFA500;
     transform: translateY(-2px);
 }
 
-.cart-count {
-    background-color: var(--accent);
-    color: var(--text-dark);
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* Responsividade */
 @media (max-width: 768px) {
-    .top-bar__nav {
-        display: none;
+    .header__nav-list {
+        gap: 1rem;
     }
-
-    .main-bar__actions {
-        gap: 8px;
-    }
-
-    .televendas .info,
-    .auth-button span:not(.icon),
-    .orders-button span:not(.icon) {
-        display: none;
+    
+    .header__title {
+        font-size: 1.2rem;
     }
 }

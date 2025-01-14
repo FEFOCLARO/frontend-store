@@ -1,0 +1,21 @@
+/* Definindo as variáveis globais de cores */
+:root {
+    --primary-dark: #1B1B3A;    /* Azul escuro para fundo */
+    --primary: #FF4500;         /* Laranja para destaques */
+    --accent: #FFD700;          /* Dourado para elementos importantes */
+    --text-light: #FFFFFF;      /* Texto claro */
+    --text-dark: #333333;       /* Texto escuro */
+    --background-light: #F5F5F5; /* Fundo claro */
+}
+
+/* Resetando alguns estilos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-light);
+}
