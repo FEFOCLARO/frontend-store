@@ -1,10 +1,17 @@
+/* Base do header */
 .header {
     background: linear-gradient(to right, #1a1a1a, #333);
     color: white;
     padding: 1rem 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
+/* Container principal */
 .header__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -14,10 +21,18 @@
     align-items: center;
 }
 
+/* Estilos do logo */
 .header__logo {
     display: flex;
     align-items: center;
+}
+
+.header__logo-link {
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
+    text-decoration: none;
+    color: white;
 }
 
 .header__logo-icon {
@@ -33,6 +48,7 @@
     -webkit-text-fill-color: transparent;
 }
 
+/* Navegação principal */
 .header__nav-list {
     display: flex;
     gap: 2rem;
@@ -47,8 +63,10 @@
     font-size: 1rem;
     position: relative;
     padding-bottom: 0.25rem;
+    transition: color 0.3s ease;
 }
 
+/* Efeito de linha sob os links */
 .header__nav-link:after {
     content: '';
     position: absolute;
@@ -64,23 +82,20 @@
     width: 100%;
 }
 
+/* Ações do usuário */
 .header__actions {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.header__admin-link {
+.header__auth-link {
     color: white;
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease;
-}
-
-.header__admin-link:hover {
-    background: rgba(255, 255, 255, 0.2);
 }
 
 .header__cart-button {
@@ -94,11 +109,17 @@
     transition: transform 0.2s, background-color 0.2s;
 }
 
+/* Estados de hover */
+.header__auth-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
 .header__cart-button:hover {
     background: #FFA500;
     transform: translateY(-2px);
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
     .header__nav-list {
         gap: 1rem;

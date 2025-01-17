@@ -5,7 +5,8 @@ function Navbar() {
     // Estado para controlar qual categoria está com dropdown aberto
     const [activeCategory, setActiveCategory] = useState(null);
 
-    // Dados das categorias e subcategorias
+    // Lista de categorias e suas subcategorias
+    // Mantemos isso como uma constante para facilitar manutenção futura
     const categories = [
         {
             id: 'especies',
@@ -42,42 +43,25 @@ function Navbar() {
                 'Treinamento Avançado',
                 'Consultoria Especializada'
             ]
-        },
-        {
-            id: 'acessorios',
-            name: 'Acessórios',
-            subcategories: [
-                'Coleiras de Segurança',
-                'GPS Trackers',
-                'Brinquedos Reforçados'
-            ]
-        },
-        {
-            id: 'saude',
-            name: 'Saúde',
-            subcategories: [
-                'Checkup Mensal',
-                'Vacinação',
-                'Emergência 24h'
-            ]
         }
     ];
 
-    // Função para lidar com o hover nas categorias
+    // Função que gerencia o hover nas categorias
     const handleCategoryHover = (categoryId) => {
         setActiveCategory(categoryId);
     };
 
     return (
         <nav className="navbar">
+            {/* Container principal - limita a largura e centraliza */}
             <div className="navbar__container">
-                {/* Botão de todas as categorias */}
+                {/* Botão de todas as categorias - sempre visível */}
                 <div 
                     className="navbar__all-categories"
                     onMouseEnter={() => handleCategoryHover('all')}
                     onMouseLeave={() => setActiveCategory(null)}
                 >
-                    <span className="icon">☰</span>
+                    <span className="navbar__icon">☰</span>
                     <span>TODAS AS CATEGORIAS</span>
                 </div>
 
@@ -90,9 +74,10 @@ function Navbar() {
                             onMouseEnter={() => handleCategoryHover(category.id)}
                             onMouseLeave={() => setActiveCategory(null)}
                         >
+                            {/* Nome da categoria */}
                             {category.name}
                             
-                            {/* Dropdown com subcategorias */}
+                            {/* Menu dropdown - aparece apenas quando categoria está ativa */}
                             {activeCategory === category.id && (
                                 <div className="navbar__dropdown">
                                     {category.subcategories.map((sub, index) => (
@@ -110,7 +95,7 @@ function Navbar() {
                     ))}
                 </div>
 
-                {/* Promoção em destaque */}
+                {/* Seção de ofertas especiais - sempre visível */}
                 <div className="navbar__promo">
                     <span className="navbar__promo-icon">🦖</span>
                     <span className="navbar__promo-text">OFERTAS JURÁSSICAS</span>

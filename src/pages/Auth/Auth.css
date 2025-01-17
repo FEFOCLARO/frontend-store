@@ -1,0 +1,166 @@
+/* ========== ESTRUTURA BASE DA PÁGINA DE AUTENTICAÇÃO ========== */
+.auth-page {
+    /* Ocupa toda a altura da tela e centraliza o conteúdo */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Gradiente de fundo que dá profundidade à página */
+    background: linear-gradient(135deg, var(--primary-dark), #000);
+    padding: 20px;
+ }
+ 
+ /* Container principal do formulário */
+ .auth-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+ }
+ 
+ /* ========== BOTÕES DE ALTERNÂNCIA LOGIN/REGISTRO ========== */
+ .auth-toggle {
+    /* Organiza os botões lado a lado */
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+ }
+ 
+ .toggle-btn {
+    /* Estilo base dos botões de alternância */
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    flex: 1;
+ }
+ 
+ /* Estado ativo do botão de alternância */
+ .toggle-btn.active {
+    color: var(--primary);
+ }
+ 
+ /* Linha indicadora sob o botão ativo */
+ .toggle-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+ }
+ 
+ /* ========== FORMULÁRIO DE AUTENTICAÇÃO ========== */
+ .auth-form {
+    /* Organiza os campos em coluna */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+ }
+ 
+ /* Título do formulário */
+ .auth-form h2 {
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+ }
+ 
+ /* Grupos de campos do formulário */
+ .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+ }
+ 
+ /* Campos de entrada */
+ .form-group input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+ }
+ 
+ /* Estado de foco dos campos */
+ .form-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.1);
+ }
+ 
+ /* Botão de submissão */
+ .auth-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+ }
+ 
+ /* Efeito hover no botão */
+ .auth-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+ }
+ 
+ /* Estado pressionado do botão */
+ .auth-button:active {
+    transform: translateY(0);
+ }
+ 
+ /* ========== MENSAGENS DE ERRO ========== */
+ .auth-error {
+    background: #ffebee;
+    color: #c62828;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 1rem;
+ }
+ 
+ /* ========== ANIMAÇÕES ========== */
+ /* Animação de entrada suave para o formulário */
+ .auth-form {
+    animation: fadeIn 0.3s ease;
+ }
+ 
+ @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+ }
+ 
+ /* ========== RESPONSIVIDADE ========== */
+ @media (max-width: 480px) {
+    .auth-container {
+        padding: 1.5rem;
+    }
+ 
+    .toggle-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+ 
+    .auth-form h2 {
+        font-size: 1.3rem;
+    }
+ }

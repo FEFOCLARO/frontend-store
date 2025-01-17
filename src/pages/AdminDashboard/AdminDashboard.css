@@ -1,128 +1,151 @@
+/* ========== ESTRUTURA BASE DO PAINEL ADMIN ========== */
 .admin-dashboard {
-    min-height: 100vh;
-    background: #f5f5f5;
-}
-
-.admin-dashboard__header {
-    background: var(--primary-dark);
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.admin-dashboard__content {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.admin-dashboard__actions {
+.admin-dashboard__title {
+    font-size: 2rem;
+    color: var(--primary-dark);
     margin-bottom: 2rem;
+    text-align: center;
 }
 
-.admin-dashboard__form-container {
+/* ========== FORMULÁRIO ADMINISTRATIVO ========== */
+.admin-form {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.admin-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
+/* Grupos de campos do formulário */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    color: var(--text-dark);
+    font-weight: 500;
 }
 
+/* Estilização dos inputs */
 .form-group input,
-.form-group textarea,
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
-.image-upload {
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Estados de foco dos campos */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.1);
+}
+
+/* ========== ÁREA DE UPLOAD DE IMAGEM ========== */
+.image-upload-area {
     border: 2px dashed #ddd;
+    border-radius: 8px;
     padding: 2rem;
     text-align: center;
-    border-radius: 4px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-upload-area:hover {
+    border-color: var(--primary);
+    background: rgba(255, 69, 0, 0.05);
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: #666;
+}
+
+.upload-icon {
+    font-size: 2rem;
 }
 
 .image-preview {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    margin-top: 1rem;
-}
-
-.dino-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.dino-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.dino-card__image {
-    height: 200px;
-    overflow: hidden;
-}
-
-.dino-card__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.dino-card__content {
-    padding: 1rem;
-}
-
-.dino-card__actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.btn {
-    padding: 0.75rem 1.5rem;
-    border: none;
+    max-width: 100%;
+    max-height: 200px;
     border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
 }
 
-.btn-primary {
+/* ========== BOTÃO DE SUBMIT ========== */
+.submit-button {
+    width: 100%;
+    padding: 1rem;
     background: var(--primary);
     color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.btn-danger {
-    background: #dc3545;
-    color: white;
+.submit-button:hover:not(:disabled) {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
 }
 
-.btn-edit {
-    background: #ffc107;
-    color: black;
+.submit-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ========== MENSAGENS DE FEEDBACK ========== */
+.feedback-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.feedback-message.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.feedback-message.error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 768px) {
+    .admin-dashboard {
+        margin: 1rem auto;
+    }
+
+    .admin-form {
+        padding: 1rem;
+    }
+
+    .admin-dashboard__title {
+        font-size: 1.5rem;
+    }
 }

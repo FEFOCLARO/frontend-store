@@ -1,9 +1,13 @@
+/* Estrutura base da navbar */
 .navbar {
     background-color: var(--primary-dark);
     padding: 0;
     border-bottom: 3px solid var(--primary);
+    /* Posicionamento abaixo do header fixo */
+    margin-top: 80px;
 }
 
+/* Container principal */
 .navbar__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -13,6 +17,7 @@
     padding: 0 16px;
 }
 
+/* Botão de todas as categorias */
 .navbar__all-categories {
     display: flex;
     align-items: center;
@@ -30,11 +35,13 @@
     background-color: #ff5722;
 }
 
+/* Lista de categorias */
 .navbar__categories {
     display: flex;
     height: 100%;
 }
 
+/* Cada categoria individual */
 .navbar__category {
     position: relative;
     padding: 0 20px;
@@ -49,6 +56,7 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Menus dropdown */
 .navbar__dropdown {
     position: absolute;
     top: 100%;
@@ -61,6 +69,7 @@
     z-index: 1000;
 }
 
+/* Items dentro do dropdown */
 .navbar__dropdown-item {
     display: block;
     padding: 8px 16px;
@@ -74,6 +83,7 @@
     color: var(--primary);
 }
 
+/* Seção de promoções */
 .navbar__promo {
     margin-left: auto;
     display: flex;
@@ -89,10 +99,6 @@
 
 .navbar__promo:hover {
     transform: scale(1.05);
-}
-
-.navbar__promo-icon {
-    font-size: 1.2em;
 }
 
 /* Responsividade */

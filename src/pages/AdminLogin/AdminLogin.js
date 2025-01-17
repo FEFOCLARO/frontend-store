@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authService } from '../../services/authService';
 import './AdminLogin.css';
 
 function AdminLogin() {
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
@@ -9,43 +14,70 @@ function AdminLogin() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            // Aqui você fará a chamada para sua API de login
-            const response = await fetch('http://localhost:3001/api/admin/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(credentials)
-            });
+        setIsLoading(true);
+        setError('');
 
-            if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem('token', data.token);
-                window.location.href = '/admin/dashboard';
+        try {
+            const { user } = await authService.login(credentials);
+            
+            if (!user.isAdmin) {
+                throw new Error('Acesso restrito a administradores');
             }
+            
+            navigate('/admin/dashboard');
         } catch (error) {
-            console.error('Erro no login:', error);
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="admin-login">
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={credentials.email}
-                    onChange={(e) => setCredentials({...credentials, email: e.target.value})}
-                />
-                <input
-                    type="password"
-                    placeholder="Senha"
-                    value={credentials.password}
-                    onChange={(e) => setCredentials({...credentials, password: e.target.value})}
-                />
-                <button type="submit">Login</button>
-            </form>
+            <div className="admin-login__card">
+                <div className="admin-login__header">
+                    <h1>Login Administrativo</h1>
+                    <p>Acesso restrito a administradores</p>
+                </div>
+                
+                {error && (
+                    <div className="admin-login__error">
+                        {error}
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="admin-login__form">
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={credentials.email}
+                            onChange={(e) => setCredentials({...credentials, email: e.target.value})}
+                            disabled={isLoading}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Senha</label>
+                        <input
+                            id="password"
+                            type="password"
+                            value={credentials.password}
+                            onChange={(e) => setCredentials({...credentials, password: e.target.value})}
+                            disabled={isLoading}
+                            required
+                        />
+                    </div>
+                    <button 
+                        type="submit" 
+                        className="admin-login__button"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Entrando...' : 'Entrar'}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }
