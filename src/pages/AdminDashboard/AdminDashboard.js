@@ -9,25 +9,7 @@ import './AdminDashboard.css';
 function AdminDashboard() {
     const navigate = useNavigate();
 
-    // Estados do componente
-    const [formData, setFormData] = useState({
-        name: '',
-        species: 'Velociraptor',
-        history: '',
-        price: '',
-        location: '',
-        temperament: '',
-        stock: 1,
-        image: null,
-        imagePreview: null
-    });
-
-    const [feedback, setFeedback] = useState({
-        type: null,
-        message: null
-    });
-
-    const [loading, setLoading] = useState(false);
+    
 
  // Verificação inicial de admin
  useEffect(() => {
