@@ -1,9 +1,42 @@
 // AdminDashboard.js - Painel de Controle Administrativo
 // Este componente permite que administradores gerenciem o catálogo de velociraptors
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
+import { authService } from '../../services/authService';
 import './AdminDashboard.css';
 
 function AdminDashboard() {
+    const navigate = useNavigate();
+
+    // Estados do componente
+    const [formData, setFormData] = useState({
+        name: '',
+        species: 'Velociraptor',
+        history: '',
+        price: '',
+        location: '',
+        temperament: '',
+        stock: 1,
+        image: null,
+        imagePreview: null
+    });
+
+    const [feedback, setFeedback] = useState({
+        type: null,
+        message: null
+    });
+
+    const [loading, setLoading] = useState(false);
+
+ // Verificação inicial de admin
+ useEffect(() => {
+    const user = authService.getCurrentUser();
+    if (!user?.isAdmin) {
+        navigate('/auth');
+    }
+}, [navigate]);
+
     // GERENCIAMENTO DE ESTADO
     // Estado principal que armazena todos os dados do formulário em um único objeto
     // Isso facilita a manutenção e evita múltiplos estados separados
@@ -36,13 +69,27 @@ function AdminDashboard() {
             ...prev,
             [name]: value
         }));
+
+        // Limpa mensagens de erro quando o usuário começa a digitar
+        if (feedback.type === 'error') {
+            setFeedback({ type: null, message: null });
+        }
     };
 
     // Função especializada para lidar com upload de imagens
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
+        
+        // Validação do tipo de arquivo
+        if (file && !file.type.startsWith('image/')) {
+            setFeedback({
+                type: 'error',
+                message: 'Por favor, selecione apenas arquivos de imagem'
+            });
+            return;
+        }
+
         if (file) {
-            // Criamos um FileReader para gerar o preview da imagem
             const reader = new FileReader();
             reader.onloadend = () => {
                 setFormData(prev => ({
@@ -56,56 +103,73 @@ function AdminDashboard() {
     };
 
     // INTERAÇÃO COM A API
-    // Função principal que envia os dados para o backend
+    // Função principal de envio do formulário
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validação inicial
+        if (!validateForm()) return;
+        
         setLoading(true);
         
         try {
-            // Criamos um FormData para enviar dados multipart (necessário para imagens)
+            // Criação do FormData com validação
             const formDataToSend = new FormData();
             
-            // Adicionamos cada campo ao FormData, exceto o preview da imagem
-            Object.keys(formData).forEach(key => {
-                if (key !== 'imagePreview') {
-                    formDataToSend.append(key, formData[key]);
+            // Adicionamos cada campo ao FormData com validação
+            Object.entries(formData).forEach(([key, value]) => {
+                if (key === 'imagePreview') return; // Ignora o preview
+                if (key === 'image' && value) {
+                    formDataToSend.append('image', value);
+                } else if (value !== null && value !== '') {
+                    formDataToSend.append(key, value);
                 }
             });
 
-            // Configuração completa da requisição
-            const response = await fetch('http://localhost:3001/api/dinosaurs', {
-                method: 'POST',
-                body: formDataToSend,
-                // Não definimos Content-Type pois o navegador o fará automaticamente com FormData
+            // Fazemos a requisição usando nossa instância do axios
+            const response = await api.post('/dinosaurs', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
             });
 
-            // Tratamento da resposta
-            if (response.ok) {
-                setFeedback({
-                    type: 'success',
-                    message: 'Velociraptor cadastrado com sucesso!'
-                });
-                
-                // Limpamos o formulário após sucesso
-                setFormData({
-                    name: '',
-                    species: 'Velociraptor',
-                    history: '',
-                    price: '',
-                    location: '',
-                    temperament: '',
-                    stock: 1,
-                    image: null,
-                    imagePreview: null
-                });
-            } else {
-                throw new Error('Falha ao cadastrar velociraptor');
-            }
+            // Tratamento do sucesso
+            setFeedback({
+                type: 'success',
+                message: 'Velociraptor cadastrado com sucesso!'
+            });
+
+            // Limpeza do formulário
+            setFormData({
+                name: '',
+                species: 'Velociraptor',
+                history: '',
+                price: '',
+                location: '',
+                temperament: '',
+                stock: 1,
+                image: null,
+                imagePreview: null
+            });
+
         } catch (error) {
+            // Tratamento de erro melhorado
+            console.error('Erro ao cadastrar:', error);
+            
+            const errorMessage = error.response?.data?.message 
+                || error.message 
+                || 'Erro ao cadastrar velociraptor';
+
             setFeedback({
                 type: 'error',
-                message: error.message
+                message: errorMessage
             });
+
+            // Se for erro de autenticação, redireciona para login
+            if (error.response?.status === 401) {
+                authService.logout();
+                navigate('/auth');
+            }
         } finally {
             setLoading(false);
         }

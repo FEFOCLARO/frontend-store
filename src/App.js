@@ -10,6 +10,7 @@ import UserDashboard from './pages/UserDashboard/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import { authService } from './services/authService';
 import './App.css';
+import DinosaurDetail from './pages/DinosaurDetail/DinosaurDetail';
 
 // Componente para proteger rotas que requerem autenticação
 const PrivateRoute = ({ children }) => {
@@ -28,6 +29,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<ProductGrid />} />
                         <Route path="/auth" element={<AuthPage />} />
+                        <Route path="/dinosaur/:id" element={<DinosaurDetail />} />
                         <Route 
                             path="/user-dashboard" 
                             element={

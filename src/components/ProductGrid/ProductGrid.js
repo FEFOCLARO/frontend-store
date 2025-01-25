@@ -2,8 +2,10 @@
 import React from 'react';
 import { useCart } from '../../contexts/CartContext';
 import './ProductGrid.css';
+import { useNavigate } from 'react-router-dom';
 
 function ProductGrid() {
+    const navigate = useNavigate();
     // Obtemos a função addToCart do contexto do carrinho.
     // O hook useCart nos permite acessar as funcionalidades do carrinho de compras
     const { addToCart } = useCart();
@@ -13,7 +15,7 @@ function ProductGrid() {
     const dinosaurs = [
         {
             id: 1,
-            name: "Velociraptor Alpha",
+            name: "Skarn da Lapa",
             species: "Velociraptor",
             price: 50000.00,
             imageUrl: "/images/raptor1.png",
@@ -22,7 +24,7 @@ function ProductGrid() {
         },
         {
             id: 2,
-            name: "Velociraptor Beta",
+            name: "Kaelix do Corcovado",
             species: "Velociraptor",
             price: 45000.00,
             imageUrl: "/images/raptor2.png",
@@ -31,7 +33,7 @@ function ProductGrid() {
         },
         {
             id: 3,
-            name: "Velociraptor Lamba",
+            name: "Vyrn do Maracanã",
             species: "Velociraptor",
             price: 45000.00,
             imageUrl: "/images/raptor3.png",
@@ -40,7 +42,7 @@ function ProductGrid() {
         },
         {
             id: 4,
-            name: "Velociraptor Gama",
+            name: "Zynara de Selarón",
             species: "Velociraptor",
             price: 45000.00,
             imageUrl: "/images/raptor4.png",
@@ -49,7 +51,7 @@ function ProductGrid() {
         },
         {
             id: 5,
-            name: "Velociraptor Xier",
+            name: "Draxor dos Trilhos",
             species: "Velociraptor",
             price: 25000.00,
             imageUrl: "/images/raptor5.png",
@@ -81,6 +83,8 @@ function ProductGrid() {
                         src={dinosaur.imageUrl} 
                         alt={dinosaur.name} 
                         className="product-image" 
+                        onClick={() => navigate(`/dinosaur/${dinosaur.id}`)}
+                        style={{ cursor: 'pointer' }}
                     />
                     <div className="product-info">
                         <h3>{dinosaur.name}</h3>
@@ -105,5 +109,6 @@ function ProductGrid() {
         </div>
     );
 }
+
 
 export default ProductGrid;
